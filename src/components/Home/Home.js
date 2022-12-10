@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Post from "../Post/Post";
-import "./Home.scss";
+import Container from '@mui/material/Container';
+
 
 
 function Home() {
@@ -29,12 +30,12 @@ function Home() {
         return <div> Loading...</div>
     }else{
         return (
-            <div className="container">
-            Home!!!
+            <div fixed style={{display: 'flex', flexWrap:'wrap', justifyContent:'center', alignItems:'center', backgroundColor:'#f0f5ff'}}>
+
                 {postList.map(post => (
-                    <Post title={post.title} text={post.text}></Post>      
+                    <Post userId={post.userId}  userName={post.userName} title={post.title} text={post.text}></Post>      
                 ) )}
-            </div>    
+            </div>   
         );
     }    
 }
