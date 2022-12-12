@@ -54,7 +54,14 @@ function PostForm(props){
                 </Avatar>
             </Link>
         }
-        title={title}
+        title={<OutlinedInput
+        id="outlined-adornment-input"
+        multiline
+        placeholder = "Title"
+        inputProps = {{maxLength : 25}} 
+        fullwidth>
+        
+        </OutlinedInput>}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
