@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Post from "../Post/Post";
 import Container from '@mui/material/Container';
+import PostForm from "../Post/PostForm";
 
 
 
@@ -31,7 +32,7 @@ function Home() {
     }else{
         return (
             <div fixed style={{display: 'flex', flexWrap:'wrap', justifyContent:'center', alignItems:'center', backgroundColor:'#f0f5ff'}}>
-
+                <PostForm userId={1}  userName={"ddd"} title={"title"} text={"text"}/>
                 {postList.map(post => (
                     <Post userId={post.userId}  userName={post.userName} title={post.title} text={post.text}></Post>      
                 ) )}

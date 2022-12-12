@@ -12,7 +12,7 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CommentIcon from '@mui/icons-material/Comment';
-import OutlinedInput from '@mui/icons-material/core/OutlinedInput';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import { Link } from "react-router-dom";
 import {useState, useEffect} from "react";
 
@@ -54,18 +54,23 @@ function PostForm(props){
                 </Avatar>
             </Link>
         }
-        title={<OutlinedInput
+        title= {<OutlinedInput
         id="outlined-adornment-input"
         multiline
         placeholder = "Title"
         inputProps = {{maxLength : 25}} 
-        fullwidth>
-        
+        fullWidth>
         </OutlinedInput>}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {text}
+        {<OutlinedInput
+        id="outlined-adornment-input"
+        multiline
+        placeholder = "Text"
+        inputProps = {{maxLength : 250}} 
+        fullWidth>
+        </OutlinedInput>}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
