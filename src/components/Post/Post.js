@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState, useEffect, useRef } from "react";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -11,9 +11,10 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Container from '@mui/material/Container';
 import CommentIcon from '@mui/icons-material/Comment';
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import Comment from "../Comment/Comment";
 
 
 
@@ -29,18 +30,45 @@ const ExpandMore = styled((props) => {
 
 
 function Post(props) {
-    const { userId, userName, title, text } = props;
+    const { userId, userName, title, text, postId } = props;
 
     const [expanded, setExpanded] = React.useState(false);
     const [liked, setLiked] = useState(false);
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [commentList, setCommentList] = useState([]);
+    const isInitialMount = useRef(true);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
+        refreshComments();
+        console.log(commentList);
     };
 
     const handleLike = () => {
         setLiked(!liked);
     }
+    
+    const refreshComments = () => {
+        fetch("/comments?postId"+postId)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setCommentList(result);
+                },
+                (error) => {
+                    setIsLoaded(true)
+                    setError(error);
+                }
+            )
+    }
+    useEffect(() => {
+        if(isInitialMount.current)
+            isInitialMount.current = false;
+        else
+            refreshComments();    
+    }, [commentList])
     return (
         <div className="postContainer">
             <Card style={{ width: 800, textAlign: 'left', margin: 20 }}>
@@ -79,9 +107,12 @@ function Post(props) {
                     </ExpandMore>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-
-                    </CardContent>
+                    <Container fixed>
+                        {error? "error" : 
+                        isLoaded? commentList.map(comment => (
+                            <Comment userId ={1} userName = {"User"} text = {comment.text}></Comment>
+                        )) : "Loading"}
+                    </Container>
                 </Collapse>
             </Card>
         </div>
