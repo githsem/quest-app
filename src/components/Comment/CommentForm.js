@@ -12,12 +12,10 @@ function CommentForm(props){
     return(
         <CardContent>
             <OutlinedInput 
-                disabled
                 id="outlined-adornment-input"
                 multiline
-                inputProps={{ maxLength: 25 }}
+                inputProps={{ maxLength: 250 }}
                 fullWidth
-                value = {text}
                 startAdornment = {
                     <InputAdornment position = "start">
                         <Link style={{ textDecoration: 'none' }} to={{ pathname: '/users/' + userId }}>
