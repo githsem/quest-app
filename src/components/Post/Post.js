@@ -15,6 +15,7 @@ import Container from '@mui/material/Container';
 import CommentIcon from '@mui/icons-material/Comment';
 import { Link } from "react-router-dom";
 import Comment from "../Comment/Comment";
+import CommentForm from "../Comment/CommentForm";
 
 
 
@@ -112,6 +113,7 @@ function Post(props) {
                         isLoaded? commentList.map(comment => (
                             <Comment userId ={1} userName = {"User"} text = {comment.text}></Comment>
                         )) : "Loading"}
+                        <CommentForm userId ={1} userName = {"User"} text = {"text"}></CommentForm>
                     </Container>
                 </Collapse>
             </Card>
