@@ -37,7 +37,7 @@ function Home() {
             <div fixed style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', backgroundColor: '#f0f5ff' }}>
                 <PostForm userId={1} userName={"ddd"} refreshPost={refreshPost} />
                 {postList.map(post => (
-                    <Post postId = {post.postId} userId={post.userId} userName={post.userName} title={post.title} text={post.text}></Post>
+                    <Post postId = {post.id} userId={post.userId} userName={post.userName} title={post.title} text={post.text}></Post>
                 ))}
             </div>
         );
