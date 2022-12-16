@@ -4,20 +4,48 @@ import Avatar from '@mui/material/Avatar';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+import { useState } from "react";
 
 
-function CommentForm(props){
-    const {text, userId, userName} = props;
+function CommentForm(props) {
+    const {userId, userName, postId } = props;
+    const[text, setText] = useState("");
 
-    return(
+    const saveComment = () => {
+        fetch("/comments", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                postId: postId,
+                userId: userId,
+                text: text,
+            }),
+        })
+            .then((res) => res.json())
+            .catch((err) => console.log("err"))
+    }
+
+    const handleSubmit = () => {
+        saveComment();
+        setText("");
+    }
+    const handleChange = (value) => {
+        setText(value);
+    }
+
+    return (
         <CardContent>
-            <OutlinedInput 
+            <OutlinedInput
                 id="outlined-adornment-input"
                 multiline
                 inputProps={{ maxLength: 250 }}
                 fullWidth
-                startAdornment = {
-                    <InputAdornment position = "start">
+                onChange={(i) => handleChange(i.target.value)}
+                startAdornment={
+                    <InputAdornment position="start">
                         <Link style={{ textDecoration: 'none' }} to={{ pathname: '/users/' + userId }}>
                             <Avatar style={{
                                 background: 'linear-gradient(45deg, #2196F3  30%, #21CBF3 90%)',
@@ -28,7 +56,20 @@ function CommentForm(props){
                         </Link>
                     </InputAdornment>
                 }
-            style = {{ color:"black", backgroundColor:"white"}}    
+                endAdornment={
+                    <InputAdornment position="end">
+                        <Button
+                            variant="contained"
+                            style={{
+                                background: 'linear-gradient(45deg, #2196F3  30%, #21CBF3 90%)',
+                                color: 'white'
+                            }}
+                            onClick={handleSubmit}
+                        >Comment</Button>
+                    </InputAdornment>
+                }
+                value = {text}
+                style={{ color: "black", backgroundColor: "white" }}
             ></OutlinedInput>
         </CardContent>
     )
