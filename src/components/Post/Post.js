@@ -51,7 +51,7 @@ function Post(props) {
     }
     
     const refreshComments = () => {
-        fetch("/comments?postId"+postId)
+        fetch("/comments?postId="+postId)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -113,7 +113,7 @@ function Post(props) {
                         isLoaded? commentList.map(comment => (
                             <Comment userId ={1} userName = {"User"} text = {comment.text}></Comment>
                         )) : "Loading"}
-                        <CommentForm userId ={1} userName = {"User"} text = {"text"}></CommentForm>
+                        <CommentForm userId ={1} userName = {"User"} postId = {postId}></CommentForm>
                     </Container>
                 </Collapse>
             </Card>
