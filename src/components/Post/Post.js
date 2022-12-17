@@ -107,6 +107,15 @@ function Post(props) {
                         <CommentIcon />
                     </ExpandMore>
                 </CardActions>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <Container fixed>
+                        {error ? "error" :
+                            isLoaded ? commentList.map(comment => (
+                                <Comment userId={1} userName={"User"} text={comment.text}></Comment>
+                            )) : "Loading"}
+                        <CommentForm userId={1} userName={"User"} postId={postId}></CommentForm>
+                    </Container>
+                </Collapse>
             </Card>
         </div>
     )
