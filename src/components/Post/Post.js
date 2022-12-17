@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -49,9 +49,9 @@ function Post(props) {
     const handleLike = () => {
         setLiked(!liked);
     }
-    
+
     const refreshComments = () => {
-        fetch("/comments?postId="+postId)
+        fetch("/comments?postId=" + postId)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -65,10 +65,10 @@ function Post(props) {
             )
     }
     useEffect(() => {
-        if(isInitialMount.current)
+        if (isInitialMount.current)
             isInitialMount.current = false;
         else
-            refreshComments();    
+            refreshComments();
     }, [commentList])
     return (
         <div className="postContainer">
@@ -109,11 +109,11 @@ function Post(props) {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <Container fixed>
-                        {error? "error" : 
-                        isLoaded? commentList.map(comment => (
-                            <Comment userId ={1} userName = {"User"} text = {comment.text}></Comment>
-                        )) : "Loading"}
-                        <CommentForm userId ={1} userName = {"User"} postId = {postId}></CommentForm>
+                        {error ? "error" :
+                            isLoaded ? commentList.map(comment => (
+                                <Comment userId={1} userName={"User"} text={comment.text}></Comment>
+                            )) : "Loading"}
+                        <CommentForm userId={1} userName={"User"} postId={postId}></CommentForm>
                     </Container>
                 </Collapse>
             </Card>
