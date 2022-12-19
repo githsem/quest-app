@@ -12,22 +12,7 @@ function CommentForm(props) {
     const {userId, userName, postId } = props;
     const[text, setText] = useState("");
 
-    const saveComment = () => {
-        fetch("/comments", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                postId: postId,
-                userId: userId,
-                text: text,
-            }),
-        })
-            .then((res) => res.json())
-            .catch((err) => console.log("err"))
-    }
-
+   
     const handleSubmit = () => {
         saveComment();
         setText("");
