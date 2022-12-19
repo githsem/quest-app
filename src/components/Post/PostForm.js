@@ -19,7 +19,21 @@ function PostForm(props) {
     const [title, setTitle] = useState("");
     const [isSent, setIsSent] = useState(false);
 
-    
+    const savePost = () => {
+        fetch("/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: title,
+                userId: userId,
+                text: text
+            }),
+        })
+            .then((res) => res.json())
+            .catch((err) => console.log("error"))
+    }
 
     const handleSubmit = () => {
         savePost();
