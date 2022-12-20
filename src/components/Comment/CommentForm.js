@@ -28,7 +28,13 @@ function CommentForm(props) {
             .catch((err) => console.log("err"))
     }
 
-    
+    const handleSubmit = () => {
+        saveComment();
+        setText("");
+    }
+    const handleChange = (value) => {
+        setText(value);
+    }
 
     return (
         <CardContent>
