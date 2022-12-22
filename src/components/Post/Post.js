@@ -40,6 +40,7 @@ function Post(props) {
     const[isLiked, setIsLiked] = useState(false);
     const isInitialMount = useRef(true);
     const[likeCount, setLikeCount] = useState(likes.length);
+    const[likeId, setLikeId] = useState(null);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -49,10 +50,16 @@ function Post(props) {
 
     const handleLike = () => {
         setIsLiked(!isLiked);
-        if(!isLiked)
+        if(!isLiked){
+            saveLike();
             setLikeCount(likeCount+1);
-        else    
+        }
+            
+        else{
+            deleteLike();
             setLikeCount(likeCount-1);
+        } 
+            
     }
 
     const refreshComments = () => {
@@ -70,10 +77,35 @@ function Post(props) {
             )
     }
 
+    const saveLike = () =>{
+        fetch("/likes",{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                postId: postId,
+                userId: userId,
+            }),
+        })
+        .then((res) => res.json())
+        .catch((err) => console.log(err))
+    }
+
+    const deleteLike = () => {
+        fetch("/likes/"+likeId,{
+            method: "DELETE",
+        })
+        .catch((err) => console.log(err))
+    }
+
     const checkLikes = () =>{
         var likeControl = likes.find((like=>like.userId === userId));
-        if(likeControl != null)
+        if(likeControl != null){
+            setLikeId(likeControl.id);
             setIsLiked(true);
+        }
+            
     }
 
     useEffect(() => {
