@@ -31,16 +31,16 @@ const ExpandMore = styled((props) => {
 
 
 function Post(props) {
-    const { userId, userName, title, text, postId, likes} = props;
+    const { userId, userName, title, text, postId, likes } = props;
 
     const [expanded, setExpanded] = React.useState(false);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [commentList, setCommentList] = useState([]);
-    const[isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
     const isInitialMount = useRef(true);
-    const[likeCount, setLikeCount] = useState(likes.length);
-    const[likeId, setLikeId] = useState(null);
+    const [likeCount, setLikeCount] = useState(likes.length);
+    const [likeId, setLikeId] = useState(null);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -50,16 +50,16 @@ function Post(props) {
 
     const handleLike = () => {
         setIsLiked(!isLiked);
-        if(!isLiked){
+        if (!isLiked) {
             saveLike();
-            setLikeCount(likeCount+1);
+            setLikeCount(likeCount + 1);
         }
-            
-        else{
+
+        else {
             deleteLike();
-            setLikeCount(likeCount-1);
-        } 
-            
+            setLikeCount(likeCount - 1);
+        }
+
     }
 
     const refreshComments = () => {
@@ -77,10 +77,10 @@ function Post(props) {
             )
     }
 
-    const saveLike = () =>{
-        fetch("/likes",{
-            method:"POST",
-            headers:{
+    const saveLike = () => {
+        fetch("/likes", {
+            method: "POST",
+            headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -88,24 +88,24 @@ function Post(props) {
                 userId: userId,
             }),
         })
-        .then((res) => res.json())
-        .catch((err) => console.log(err))
+            .then((res) => res.json())
+            .catch((err) => console.log(err))
     }
 
     const deleteLike = () => {
-        fetch("/likes/"+likeId,{
+        fetch("/likes/" + likeId, {
             method: "DELETE",
         })
-        .catch((err) => console.log(err))
+            .catch((err) => console.log(err))
     }
 
-    const checkLikes = () =>{
-        var likeControl = likes.find((like=>like.userId === userId));
-        if(likeControl != null){
+    const checkLikes = () => {
+        var likeControl = likes.find((like => like.userId === userId));
+        if (likeControl != null) {
             setLikeId(likeControl.id);
             setIsLiked(true);
         }
-            
+
     }
 
     useEffect(() => {
@@ -115,7 +115,7 @@ function Post(props) {
             refreshComments();
     }, [commentList])
 
-    useEffect(() =>{checkLikes()},[])
+    useEffect(() => { checkLikes() }, [])
     return (
         <div className="postContainer">
             <Card style={{ width: 800, textAlign: 'left', margin: 20 }}>
