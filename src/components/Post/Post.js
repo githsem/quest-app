@@ -91,14 +91,12 @@ function Post(props) {
             .then((res) => res.json())
             .catch((err) => console.log(err))
     }
-
     const deleteLike = () => {
         fetch("/likes/" + likeId, {
             method: "DELETE",
         })
             .catch((err) => console.log(err))
     }
-
     const checkLikes = () => {
         var likeControl = likes.find((like => like.userId === userId));
         if (likeControl != null) {
