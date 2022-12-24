@@ -62,20 +62,7 @@ function Post(props) {
 
     }
 
-    const refreshComments = () => {
-        fetch("/comments?postId=" + postId)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setCommentList(result);
-                },
-                (error) => {
-                    setIsLoaded(true)
-                    setError(error);
-                }
-            )
-    }
+    
 
     const saveLike = () => {
         fetch("/likes", {
