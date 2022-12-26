@@ -136,7 +136,22 @@ function Post(props) {
                         {text}
                     </Typography>
                 </CardContent>
-                
+                <CardActions disableSpacing>
+                    <IconButton
+                        onClick={handleLike}
+                        aria-label="add to favorites">
+                        <FavoriteIcon style={isLiked ? { color: "red" } : null} />
+                    </IconButton>
+                    {likeCount}
+                    <ExpandMore
+                        expand={expanded}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                    >
+                        <CommentIcon />
+                    </ExpandMore>
+                </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <Container fixed>
                         {error ? "error" :
