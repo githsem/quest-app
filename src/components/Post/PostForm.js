@@ -83,7 +83,16 @@ function PostForm(props) {
                             </Avatar>
                         </Link>
                     }
-                    
+                    title={<OutlinedInput
+                        id="outlined-adornment-input"
+                        multiline
+                        placeholder="Title"
+                        inputProps={{ maxLength: 25 }}
+                        fullWidth
+                        value={title}
+                        onChange={(i) => handleTitle(i.target.value)}
+                    >
+                    </OutlinedInput>}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
