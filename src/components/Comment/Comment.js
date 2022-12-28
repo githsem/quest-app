@@ -19,16 +19,7 @@ function Comment(props){
                 fullWidth
                 value = {text}
                 startAdornment = {
-                    <InputAdornment position = "start">
-                        <Link style={{ textDecoration: 'none' }} to={{ pathname: '/users/' + userId }}>
-                            <Avatar style={{
-                                background: 'linear-gradient(45deg, #2196F3  30%, #21CBF3 90%)',
-                                color: 'white'
-                            }} aria-label="recipe">
-                                {userName.charAt(0).toUpperCase()}
-                            </Avatar>
-                        </Link>
-                    </InputAdornment>
+                    
                 }
             style = {{ color:"black", backgroundColor:"white"}}    
             ></OutlinedInput>
