@@ -26,7 +26,9 @@ function Navbar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'left' }}>
+                        <Link style={{ textDecoration: 'none', boxShadow: 'none', color: 'white' }} to="/">Home</Link>
+                    </Typography>
                     <Typography variant="h6" component="div" sx={{ textAlign: 'right' }}>
                         <Link style={{ textDecoration: 'none', boxShadow: 'none', color: 'white' }} to={{ pathname: '/users/' + userId }}>User</Link>
                     </Typography>
