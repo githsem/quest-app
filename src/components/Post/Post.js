@@ -47,7 +47,19 @@ function Post(props) {
         console.log(commentList);
     };
 
-    
+    const handleLike = () => {
+        setIsLiked(!isLiked);
+        if (!isLiked) {
+            saveLike();
+            setLikeCount(likeCount + 1);
+        }
+
+        else {
+            deleteLike();
+            setLikeCount(likeCount - 1);
+        }
+
+    }
 
     const refreshComments = () => {
         fetch("/comments?postId=" + postId)
