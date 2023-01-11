@@ -128,7 +128,7 @@ function Post(props) {
                             </Avatar>
                         </Link>
                     }
-                    
+                    title={title}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
